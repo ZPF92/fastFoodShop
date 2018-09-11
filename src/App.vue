@@ -1,23 +1,26 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <router-view></router-view>
+    <Footer/>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+  import {reqAddress} from './api'
+  import Footer from '@/components/Footer/Footer.vue'
+  export default {
+    name: 'App',
+    components:{
+      Footer
+    },
+    async mounted(){
+      const result = await reqAddress('40.10038,116.36867');
+      console.log(result);
+    }
+  }
+
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus">
+  
 </style>
