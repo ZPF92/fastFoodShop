@@ -16,22 +16,34 @@ export default new VueRouter({
 			path:'/',
 			name:'Home',
 			component:Home,
-			// alias:['/index']
+			// alias:['/index'],
+      meta:{
+			  showFooter:true
+      }
 		},
 		{
 			path:'/order',
 			name:'Order',
-			component:Order
+			component:Order,
+      meta:{
+        showFooter:true
+      }
 		},
 		{
 			path:'/search',
 			name:'Search',
-			component:Search
+			component:Search,
+      meta:{
+        showFooter:true
+      }
 		},
 		{
 			path:'/profile',
 			name:'Profile',
-			component:Profile
+			component:Profile,
+      meta:{
+        showFooter:true
+      }
 		},
 		{
 			path:'/login',
