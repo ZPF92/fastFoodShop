@@ -6,21 +6,23 @@
 </template>
 
 <script>
-  import {reqAddress} from './api'
+  import { mapActions } from 'vuex'
   import Footer from '@/components/Footer/Footer.vue'
   export default {
     name: 'App',
+    components:{
+      Footer
+    },
     data(){
       return {
         showFooter:this.$route.meta.showFooter
       };
     },
-    components:{
-      Footer
+    methods:{
+      ...mapActions(['reqAddress'])
     },
-    async mounted(){
-      // const result = await reqAddress('40.10038,116.36867');
-      // console.log(result);
+    mounted(){
+      this.reqAddress();
     },
     updated(){
       this.showFooter = this.$route.meta.showFooter;
