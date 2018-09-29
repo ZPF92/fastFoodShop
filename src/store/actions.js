@@ -27,7 +27,7 @@ export default {
   async reqFoodList({commit}){
     const result = await reqFoodList();
     if(result.code == 0){
-      const { categorys } = result.data;
+      const categorys = result.data;
       commit(RECEIVE_CATEGORYS,{ categorys });
     }
   },
@@ -39,7 +39,7 @@ export default {
     } = state;
     const result = await reqShopList(latitude + ',' + longitude);
     if(result.code == 0){
-      const { shops } = result.data;
+      const shops = result.data;
       commit(RECEIVE_SHOPS,{ shops });
     }
   }

@@ -6,13 +6,12 @@ import {
 
 export default {
   [RECEIVE_ADDRESS](state,{ address }){
-
     state.address = address;
   },
   [RECEIVE_CATEGORYS](state,{ categorys }){
-    state.address = categorys;
+    state.categorys = categorys;
   },
   [RECEIVE_SHOPS](state,{ shops }){
-    state.address = shops;
+    state.shops = shops;
   }
 }
