@@ -32,5 +32,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
+  [v-cloak]{
+    display:none;
+  }
 </style>

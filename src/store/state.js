@@ -1,6 +1,6 @@
 export default {
-  latitude:40.100038,//纬度
-  longitude:116.36876,//经度
+  latitude:28.20954,//纬度
+  longitude:112.890309,//经度
   address:{},//地址信息对象
   categorys:[],//食品分类数组
   shops:[],//商家数组

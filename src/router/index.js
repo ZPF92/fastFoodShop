@@ -3,11 +3,12 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Home from '@/pages/Home/Home.vue'
-import Order from '@/pages/Order/Order.vue'
-import Profile from '@/pages/Profile/Profile.vue'
-import Search from '@/pages/Search/Search.vue'
-import Login from '@/pages/Login/Login.vue'
+const Home = resolve => require.ensure([],() => resolve(require('@/pages/Home/Home.vue')))
+const Order = resolve => require.ensure([],() => resolve(require('@/pages/Order/Order.vue')))
+const Profile = resolve => require.ensure([],() => resolve(require('@/pages/Profile/Profile.vue')))
+const Search = resolve => require.ensure([],() => resolve(require('@/pages/Search/Search.vue')))
+const Login = () => import('@/pages/Login/Login.vue')
+
 
 export default new VueRouter({
 	mode:'history',

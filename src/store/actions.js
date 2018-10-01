@@ -37,7 +37,7 @@ export default {
       latitude,
       longitude
     } = state;
-    const result = await reqShopList(latitude + ',' + longitude);
+    const result = await reqShopList(latitude,longitude);
     if(result.code == 0){
       const shops = result.data;
       commit(RECEIVE_SHOPS,{ shops });

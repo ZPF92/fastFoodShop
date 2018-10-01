@@ -18,7 +18,7 @@
               <div class="food_container">
                 <img :src="imgBaseUrl+item.image_url">
               </div>
-              <span>{{item.title}}}</span>
+              <span v-cloak>{{item.title}}</span>
             </a>
           </div>
         </div>
@@ -75,10 +75,11 @@
       }
     },
     methods:{
-      ...mapActions(['reqFoodList'])
+      ...mapActions(['reqFoodList','reqShopList'])
     },
     mounted(){
 	    this.reqFoodList();
+	    this.reqShopList();
     },
     watch:{
       categorys(){

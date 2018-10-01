@@ -4,7 +4,7 @@ export const reqAddress = geohash => ajax(`/api/position/${geohash}`)
 
 export const reqFoodList = () => ajax(`/api/index_category`)
 
-export const reqShopList = (latitude,longitude) => ajax(`/api/shop`,{latitude,longitude})
+export const reqShopList = (latitude,longitude) => ajax(`/api/shops`,{latitude,longitude})
 
 export const reqCaptcha = () => ajax(`/api/captcha`)
 
