@@ -11,9 +11,10 @@
 <script>
   import './HeaderTop.styl'
 	export default {
+    name: 'HeaderTop',
     props:{
       title:String
     },
-	  name: 'HeaderTop'
+    inheritAttrs:false
 	}
 </script>
