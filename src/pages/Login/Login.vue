@@ -47,7 +47,7 @@
               </section>
             </section>
           </div>
-          <button class="login_submit">登录</button>
+          <button class="login_submit" @click.prevent="login">登录</button>
         </form>
         <a href="javascript:;" class="about_us">关于我们</a>
       </div>
@@ -55,13 +55,24 @@
         <i class="iconfont icon-jiantou2"></i>
       </a>
     </div>
+    <AlertTip
+      v-show="isShowAlertTip"
+      :alertText="alertText"
+      @closeTip="closeTip"
+    />
   </section>
 </template>
 
 <script>
 	import './Login.styl'
+  import { mapActions } from 'vuex'
+  import { reqCode,loginSms } from '@/api'
+  import AlertTip from '@/components/AlertTip/AlertTip.vue'
 	export default {
 	  name: 'Login',
+    components:{
+      AlertTip
+    },
     data(){
 	    return {
 	      loginWay:true,
@@ -71,7 +82,9 @@
         pwd:'',
         captcha:'',
         sendCodeTime:0,
-        showPwd:false
+        showPwd:false,
+        isShowAlertTip:false,
+        alertText:''
       };
     },
     computed:{
@@ -80,8 +93,10 @@
       }
     },
     methods:{
-	    sendCode(){
-        if(this.isPhoneNumber){
+      ...mapActions(['saveUserInfo']),
+	    async sendCode(){
+        const { isPhoneNumber,phone,showAlert} = this;
+        if(isPhoneNumber){
           this.sendCodeTime = 30;
           const timer = setInterval(() => {
             this.sendCodeTime--;
@@ -89,10 +104,58 @@
               clearInterval(timer);
             }
           },1000);
+          const result = await reqCode(phone);
+          if(result.code === 1){
+            showAlert(result.msg);
+            this.sendCodeTime = 0;
+            clearInterval(timer);
+          }
         }
       },
       updateCaptcha(ev){
 	      ev.target.src = `http://localhost:3000/captcha?t=${new Date().getTime()}`;
+      },
+      showAlert(text){
+	      this.alertText = text;
+	      this.isShowAlertTip = true;
+      },
+      async login(){
+	      const { loginWay,showAlert,saveUserInfo } = this;
+	      if(loginWay){
+          const { phone,code,isPhoneNumber } = this;
+          if(!isPhoneNumber){
+            showAlert('手机号码不正确');
+            return;
+          }else if(!/\d{6}/g.test(code)){
+            showAlert('验证码不正确');
+            return;
+          }else{
+            const result = await loginSms({phone,code});
+            if(result.code === 1){
+              showAlert(result.msg);
+            }else{
+              const userInfo = result.data;
+              saveUserInfo(userInfo);
+              this.$router.replace({name:'Profile'});
+            }
+          }
+        }else{
+          const { name,pwd,captcha } = this;
+          if(!name){
+            showAlert('必须指定用户名');
+            return;
+          }else if(!pwd){
+            showAlert('必须指定密码');
+            return;
+          }else if(!captcha){
+            showAlert('必须指定验证码');
+            return;
+          }
+        }
+      },
+      closeTip(){
+	      this.isShowAlertTip = false;
+	      this.alertText = '';
       }
     }
 	}

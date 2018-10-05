@@ -8,12 +8,12 @@
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
-          <p class="user-info-top">登录/注册</p>
+          <p class="user-info-top" v-show="!userInfo.phone">{{userInfo._id ? userInfo.name : '登录/注册'}}</p>
           <p>
             <span class="user-icon">
               <i class="iconfont icon-shouji icon-mobile"></i>
             </span>
-            <span class="icon-mobile-number">暂无绑定手机号</span>
+            <span class="icon-mobile-number">{{userInfo.phone ? userInfo.phone : '暂无绑定手机号'}}</span>
           </p>
         </div>
         <span class="arrow">
@@ -93,12 +93,16 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import  HeaderTop from '@/components/HeaderTop/HeaderTop.vue'
 	import './Profile.styl'
 	export default {
 	  name: 'Profile',
     components:{
       HeaderTop
+    },
+    computed:{
+      ...mapState(['userInfo'])
     }
 	}
 </script>

@@ -19,10 +19,11 @@
       };
     },
     methods:{
-      ...mapActions(['reqAddress'])
+      ...mapActions(['reqAddress','reqUserInfo'])
     },
     mounted(){
       this.reqAddress();
+      this.reqUserInfo();
     },
     updated(){
       this.showFooter = this.$route.meta.showFooter;

@@ -10,7 +10,7 @@ export const reqCaptcha = () => ajax(`/api/captcha`)
 
 export const loginPwd = ({name,pwd,captcha}) => ajax(`/api/login_pwd`,{name,pwd,captcha},'POST')
 
-export const sendCode = phone => ajax(`/api/sendcode`,{phone})
+export const reqCode = phone => ajax(`/api/sendcode`,{phone})
 
 export const loginSms = ({phone,code}) => ajax(`/api/login_sms`,{phone,code},'POST')
 
