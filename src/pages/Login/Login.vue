@@ -66,8 +66,8 @@
 <script>
 	import './Login.styl'
   import { mapActions } from 'vuex'
-  import { reqCode,loginSms } from '@/api'
-  import AlertTip from '@/components/AlertTip/AlertTip.vue'
+  import { reqCode,loginSms,loginPwd } from '../../api'
+  import AlertTip from '../../components/AlertTip/AlertTip.vue'
 	export default {
 	  name: 'Login',
     components:{
@@ -120,6 +120,7 @@
 	      this.isShowAlertTip = true;
       },
       async login(){
+        let result;
 	      const { loginWay,showAlert,saveUserInfo } = this;
 	      if(loginWay){
           const { phone,code,isPhoneNumber } = this;
@@ -129,16 +130,8 @@
           }else if(!/\d{6}/g.test(code)){
             showAlert('验证码不正确');
             return;
-          }else{
-            const result = await loginSms({phone,code});
-            if(result.code === 1){
-              showAlert(result.msg);
-            }else{
-              const userInfo = result.data;
-              saveUserInfo(userInfo);
-              this.$router.replace({name:'Profile'});
-            }
           }
+          result = await loginSms({phone,code});
         }else{
           const { name,pwd,captcha } = this;
           if(!name){
@@ -151,6 +144,14 @@
             showAlert('必须指定验证码');
             return;
           }
+          result = await loginPwd({name,pwd,captcha});
+        }
+        if(result.code === 1){
+          showAlert(result.msg);
+        }else{
+          const userInfo = result.data;
+          saveUserInfo(userInfo);
+          this.$router.replace({name:'Profile'});
         }
       },
       closeTip(){

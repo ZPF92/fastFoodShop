@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import  HeaderTop from '@/components/HeaderTop/HeaderTop.vue'
+  import  HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
 	import './Order.styl'
 	export default {
 	  name: 'Order',

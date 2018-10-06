@@ -94,7 +94,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import  HeaderTop from '@/components/HeaderTop/HeaderTop.vue'
+  import  HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
 	import './Profile.styl'
 	export default {
 	  name: 'Profile',

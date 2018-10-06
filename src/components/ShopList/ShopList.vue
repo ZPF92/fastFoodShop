@@ -51,7 +51,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
-  import Star from '@/components/Star/Star.vue'
+  import Star from '../Star/Star.vue'
 	import './ShopList.styl'
 	export default {
 	  name: 'ShopList',
