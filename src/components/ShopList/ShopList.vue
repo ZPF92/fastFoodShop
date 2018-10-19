@@ -1,10 +1,16 @@
 <template>
   <div class="shop_container">
     <ul class="shop_list" v-if="shopsArr.length">
-      <li class="shop_li border-1px" v-for="(shop,index) in shopsArr" :key="index">
+      <li class="shop_li border-1px"
+          v-for="(shop,index) in shopsArr"
+          :key="index"
+          @click="$router.push({name:'ShopGoods'})"
+      >
         <a>
           <div class="shop_left">
-            <img class="shop_img" :src="imgBaseUrl+shop.image_path">
+            <img class="shop_img"
+                 :src="imgBaseUrl+shop.image_path"
+            >
           </div>
           <div class="shop_right">
             <section class="shop_detail_header">
